@@ -33,8 +33,6 @@ To get started with ReadSail, follow these steps:
    ```
    docker build -t your-mssql-image:latest .
    ```
-4. Edit the Library.java & replace the password in the "connectionURL" variable with the password you set in dockerfile.
-
 4. Build and run the application using your preferred Java IDE. I used Intellij <3.
 
 5. Enjoy and modify it to your liking!!
