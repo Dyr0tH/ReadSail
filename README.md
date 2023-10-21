@@ -14,9 +14,9 @@ ReadSail (Library Book Issue Management System) is a simple and user-friendly Ja
 
 5. **Login & Logout Functionality**: Secure your library database with login and logout functionality to ensure only authorized users can access and manage the system.
 
-6. **Database Powered by MSSQL**: ReadSail uses Microsoft SQL Server as its database engine, running in a Docker container for ease of deployment and management.
+6. **Database Powered by MySQL**: ReadSail uses MySQL Server as its database engine, running in a Docker container for ease of deployment and management.
 
-7. **Inbuilt Database Manger**: ReadSail comes with a built-in Database Manager that takes care of all the heavy lifting. No need to play architect with tables and columns! Just toss our trusty MSSQL DB into the Docker ring, fire up ReadSail, and let our Database Manager do the 'boring' stuff for you. It's like having your own personal data wizard—no capes required!
+7. **Inbuilt Database Manager**: ReadSail comes with a built-in Database Manager that takes care of all the heavy lifting. No need to play architect with tables and columns! Just toss our trusty MySQL DB into the Docker ring, fire up ReadSail, and let our Database Manager do the 'boring' stuff for you. It's like having your own personal data wizard—no capes required!
 
 ## Getting Started
 
@@ -27,11 +27,11 @@ To get started with ReadSail, follow these steps:
    git clone https://github.com/Dyr0tH/ReadSail.git
    ```
 
-2. Install the necessary dependency [Docker](https://www.docker.com/) & the [JDBC Driver](https://learn.microsoft.com/en-us/sql/connect/jdbc/download-microsoft-jdbc-driver-for-sql-server?view=sql-server-ver16#download) from official microsoft website & configure it with your IDE.
+2. Install the necessary dependency [Docker](https://www.docker.com/) & the [JDBC Driver](https://dev.mysql.com/downloads/connector/j/) from official microsoft website & configure it with your IDE.
 
-3. Setup the Database container (after replacing the default password with your password in dockerfile) with the following docker command:
+3. Set up the Database container (after replacing the default password with your password in docker-compose.yml) with the following docker command:
    ```
-   docker build -t your-mssql-image:latest .
+   docker-compose up
    ```
 4. Build and run the application using your preferred Java IDE. I used Intellij <3.
 

@@ -9,10 +9,12 @@ public class Main {
 
     // Making a scroll panel
     JScrollPane scrollPane;
-    JList<String> bookList;
-    DefaultListModel<String> listModel;
 
-    private Main() throws InterruptedException{
+    // info labels
+    public static JLabel connection_status_show = new JLabel();
+
+
+    private Main() throws InterruptedException {
         Library library = new Library();
         JFrame frame = new JFrame("Library Admin Panel");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Close the program when the window is closed
@@ -68,7 +70,6 @@ public class Main {
         JTextField bookPriceInput = new JTextField(20);
 
         JLabel connection_status_text = new JLabel("Database connection status:");
-        JLabel connection_status_show = new JLabel("DISCONNECTED");
         JLabel current_user_text = new JLabel("Logged in as:");
         JLabel current_user_show = new JLabel("GUEST");
 
@@ -78,15 +79,14 @@ public class Main {
         JButton removeBook_btn = new JButton("Remove a book", removeIcon);
         JButton quitBtn = new JButton("Quit Application", quitIcon);
         JButton loginBtn = new JButton("Login", loginIcon);
+        loginBtn.setEnabled(false);
         JButton logoutBtn = new JButton("Logout", logoutIcon);
+        logoutBtn.setEnabled(false);
         JButton dbManageBtn = new JButton("Open DB manager", dbIcon);
+        dbManageBtn.setEnabled(false);
         JButton reconnectDB = new JButton("Reconnect to Database", connectIcon);
         reconnectDB.setEnabled(false);
 
-
-        // Initializing list..idk
-        listModel = new DefaultListModel<>();
-        bookList = new JList<>(listModel);
 
         // creating JTable
         String[] columnNames = {"Book", "Author", "ID", "Price"};
@@ -141,7 +141,9 @@ public class Main {
         // Make the frame visible
         frame.setVisible(true);
 
-        Popup popup = new Popup();
+
+
+        Popup popup = new Popup(); 
 
         // Attaching listeners to buttons
         reconnectDB.addActionListener(e -> Library.connectToDB());
@@ -149,6 +151,7 @@ public class Main {
         dbManageBtn.addActionListener(e -> new DBManager());
 
         quitBtn.addActionListener(e -> popup.PopupWindow("Exit application ??", "Quit ?", true));
+
 
         book_add_btn.addActionListener(e -> {
 
@@ -172,7 +175,6 @@ public class Main {
 
                 try{
                     library.AddBook(bookMap);
-                    System.out.println("Hashmap passed");
 
                     String book = bookNameInput.getText().strip();
                     String author = authorNameInput.getText().strip();
@@ -182,8 +184,6 @@ public class Main {
 
                     String[] bookData = {book, author, bookId, price};
                     tableModel.addRow(bookData);
-
-                    System.out.println("repainted");
 
                     // clearing the text box
                     bookNameInput.setText("");

@@ -1,0 +1,8 @@
+USE Library;
+
+CREATE TABLE IF NOT EXISTS BookShelf (
+    BookID INT PRIMARY KEY,
+    BookName NVARCHAR(255) NOT NULL,
+    AuthorName NVARCHAR(255) NOT NULL,
+    BookPrice DECIMAL(10, 2) NOT NULL
+);
