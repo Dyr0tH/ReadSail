@@ -33,21 +33,21 @@ public class Library extends Component {
         String dbName = envReader.get("DATABASENAME");
         String dbUsername = envReader.get("DATABASEUSERNAME");
         String dbPassword = envReader.get("DATABASEPASSWORD");
-        int connectionInterval = Integer.parseInt(Objects.requireNonNull(envReader.get("INTERVALTIME"))); // time in seconds to try to connect to db.
 
-        String connectionURL = String.format("jdbc:sqlserver://%s:%s;databaseName=%s;user=%s;password=%s;encrypt=false", dbUrl, dbPort, dbName, dbUsername, dbPassword);
+        int connectionInterval = Integer.parseInt(Objects.requireNonNull(envReader.get("INTERVALTIME")));
+        String connectionURL = String.format("jdbc:mysql://%s:%s/%s", dbUrl, dbPort, dbName);
         System.out.println("connection url is: " + connectionURL);
 
 
         try{
-
             DriverManager.setLoginTimeout(connectionInterval);
             Popup.conLoad(connectionInterval);
-            connectionDB =  DriverManager.getConnection(connectionURL);
+            connectionDB =  DriverManager.getConnection(connectionURL, dbUsername, dbPassword);
             connectionStatus = true;
 
             System.out.println("Connection established");
             System.out.println("Connection status: " + connectionStatus);
+            Main.connection_status_show.setText("CONNECTED");
 
 
         } catch (Exception e) {
@@ -73,22 +73,28 @@ public class Library extends Component {
         // will be used when sending data to SQL server
         String tableName = envReader.get("TABLENAME");
 
-        int bookName = Integer.parseInt(bookMap.get("bookName"));
+        String bookName = bookMap.get("bookName");
         String authorName = bookMap.get("authorName");
         int bookId = Integer.parseInt(bookMap.get("bookIdNumber"));
         int bookPrice = Integer.parseInt(bookMap.get("bookPrice"));
+        String insertSql = String.format("INSERT INTO %s (BookID, BookName, AuthorName, BookPrice) VALUES (?, ?, ?, ?)", tableName);
 
         // Adding data to DB
-        try{
-            Statement statement = connectionDB.createStatement();
+        try(PreparedStatement preparedStatement = connectionDB.prepareStatement(insertSql)){
 
-            // REFERENCE: INSERT INTO "LibraryShelf"("BookName", "AuthorName", "BookID", "BookPrice") VALUES('JAVA For beginners', 'Again Shahid', '102933', '1002');
+            preparedStatement.setInt(1, bookId);
+            preparedStatement.setString(2, bookName);
+            preparedStatement.setString(3, authorName);
+            preparedStatement.setInt(4, bookPrice);
 
-            String query = String.format("INSERT INTO \"%s\"(\"BookID\", \"BookName\", \"AuthorName\", \"BookPrice\") VALUES('%d', '%s', '%s', '%d')", tableName, bookId, bookName, authorName, bookPrice);
-            statement.executeQuery(query);
-            System.out.printf("Adding to table: %s\nQuery is:%s", tableName, query);
+            int rowsAffected = preparedStatement.executeUpdate();
 
-            System.out.println("Hashmap received & info added to the DB");
+            if(rowsAffected > 0){
+                System.out.println("Query executed successfully\nDatabase updated!!");
+            }else{
+                System.out.println("Error while executing the query\nNo changes in database");
+            }
+            
         }
         catch(SQLException e){
             System.out.println("Error while writing data to DB");
