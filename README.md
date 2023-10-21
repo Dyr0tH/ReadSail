@@ -37,6 +37,17 @@ To get started with ReadSail, follow these steps:
 
 5. Enjoy and modify it to your liking!!
 
+## TODO
+
+1. **Design & Implement the Database Manager**: Develop and finalize the Database Manager component, ensuring it handles database operations effectively.
+
+2. **Finish the 'Remove Book' Feature**: Complete the implementation of the 'Remove Book' feature, allowing users to remove books from the library database.
+
+3. **Implement User Authentication Feature**: Create a secure user authentication system to restrict access and manage authorized users.
+
+Feel free to contribute to these tasks or reach out for assistance. Your contributions are highly appreciated!
+
+
 ## Contributing
 
 ReadSail is an open-source project, and we welcome contributions from the community. If you'd like to contribute, it would be awesome !!
