@@ -142,7 +142,6 @@ public class Main {
         frame.setVisible(true);
 
 
-
         Popup popup = new Popup(); 
 
         // Attaching listeners to buttons
