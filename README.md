@@ -27,7 +27,7 @@ To get started with ReadSail, follow these steps:
    git clone https://github.com/Dyr0tH/ReadSail.git
    ```
 
-2. Install the necessary dependency [Docker](https://www.docker.com/) & the [JDBC Driver](https://dev.mysql.com/downloads/connector/j/) from official microsoft website & configure it with your IDE.
+2. Install the necessary dependency [Docker](https://www.docker.com/) & the [JDBC Driver](https://dev.mysql.com/downloads/connector/j/) from official websites & configure it with your IDE.
 
 3. Set up the Database container (after replacing the default password with your password in docker-compose.yml) with the following docker command:
    ```
