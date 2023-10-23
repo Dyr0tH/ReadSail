@@ -29,7 +29,9 @@ To get started with ReadSail, follow these steps:
 
 2. Install the necessary dependency [Docker](https://www.docker.com/) & the [JDBC Driver](https://dev.mysql.com/downloads/connector/j/) from official websites & configure it with your IDE.
 
-3. Set up the Database container (after replacing the default password with your password in docker-compose.yml) with the following docker command:
+3. Replace the password with your own in docker-compose.yml & in .env file if you're using docker to setup the database. If you already have a database with the required table and fields, then just make necessary changes in the .env file.
+
+3. Set up the Database container with the following docker command:
    ```
    docker-compose up
    ```
