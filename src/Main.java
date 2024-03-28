@@ -71,7 +71,7 @@ public class Main {
 
         JLabel connection_status_text = new JLabel("Database connection status:");
         JLabel current_user_text = new JLabel("Logged in as:");
-        JLabel current_user_show = new JLabel("GUEST");
+        JLabel current_user_show = new JLabel("LIBRARIAN");
 
         // Creating buttons
         JButton book_add_btn = new JButton("Add book", bookIcon);
@@ -129,7 +129,7 @@ public class Main {
 
         // Add the subUpPanel to the frame
         subUpPanel.add(westGridUp);
-        subUpPanel.add(centerGrid);
+//        subUpPanel.add(centerGrid);
         subUpPanel.add(eastGridUp);
 
         mainPanel.add(subUpPanel, BorderLayout.NORTH);
@@ -142,10 +142,12 @@ public class Main {
         frame.setVisible(true);
 
 
+
+
         Popup popup = new Popup(); 
 
         // Attaching listeners to buttons
-        reconnectDB.addActionListener(e -> Library.connectToDB());
+        reconnectDB.addActionListener(e -> library.connectToDB());
 
         dbManageBtn.addActionListener(e -> new DBManager());
 
@@ -200,7 +202,7 @@ public class Main {
 
             try {
                 ResultSet retrievedBook = library.sendBook();
-                System.out.println("books delivered from backend");
+                System.out.println("books received from backend");
 
 
                 tableModel.setRowCount(0);
